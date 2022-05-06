@@ -341,8 +341,9 @@ class ModMenu extends FlxSubState
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 
+				#if !html5
 				PlayerSettings.player1.controls.loadKeyBinds();
-
+				#end
 				FlxG.state.closeSubState();
 
 				FreeplayState.openMod = false;
@@ -369,7 +370,6 @@ class ModMenu extends FlxSubState
 						}
 					}
 			}
-
 			if (changedMod)
 				FreeplayState.updateDiffCalc();
 		}

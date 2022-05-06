@@ -34,8 +34,7 @@ enum abstract Action(String) to String from String
 	var CHEAT = "cheat";
 }
 #else
-@:enum
-abstract Action(String) to String from String
+@:enum abstract Action(String) to String from String
 {
 	var UP = "up";
 	var LEFT = "left";
@@ -55,9 +54,8 @@ abstract Action(String) to String from String
 	var RESET = "reset";
 	var CHEAT = "cheat";
 }
-#end
+#end enum Device
 
-enum Device
 {
 	Keys;
 	Gamepad(id:Int);
@@ -490,7 +488,9 @@ class Controls extends FlxActionSet
 
 	public function setKeyboardScheme(scheme:KeyboardScheme, reset = true)
 	{
+		#if !html5
 		loadKeyBinds();
+		#end
 		/*if (reset)
 				removeKeyboard();
 
@@ -576,24 +576,24 @@ class Controls extends FlxActionSet
 
 		var buttons = new Map<Control, Array<FlxGamepadInputID>>();
 
-		buttons.set(Control.UP, [FlxGamepadInputID.fromString(FlxG.save.data.gpupBind)]);
-		buttons.set(Control.LEFT, [FlxGamepadInputID.fromString(FlxG.save.data.gpleftBind)]);
-		buttons.set(Control.DOWN, [FlxGamepadInputID.fromString(FlxG.save.data.gpdownBind)]);
-		buttons.set(Control.RIGHT, [FlxGamepadInputID.fromString(FlxG.save.data.gprightBind)]);
+		buttons.set(Control.UP, [FlxGamepadInputID.fromString(Std.string(FlxG.save.data.gpupBind))]);
+		buttons.set(Control.LEFT, [FlxGamepadInputID.fromString(Std.string(FlxG.save.data.gpleftBind))]);
+		buttons.set(Control.DOWN, [FlxGamepadInputID.fromString(Std.string(FlxG.save.data.gpdownBind))]);
+		buttons.set(Control.RIGHT, [FlxGamepadInputID.fromString(Std.string(FlxG.save.data.gprightBind))]);
 		buttons.set(Control.ACCEPT, [FlxGamepadInputID.A]);
 		buttons.set(Control.BACK, [FlxGamepadInputID.B]);
 		buttons.set(Control.PAUSE, [FlxGamepadInputID.START]);
 
 		addGamepad(0, buttons);
 
-		inline bindKeys(Control.UP, [FlxKey.fromString(FlxG.save.data.upBind), FlxKey.UP]);
-		inline bindKeys(Control.DOWN, [FlxKey.fromString(FlxG.save.data.downBind), FlxKey.DOWN]);
-		inline bindKeys(Control.LEFT, [FlxKey.fromString(FlxG.save.data.leftBind), FlxKey.LEFT]);
-		inline bindKeys(Control.RIGHT, [FlxKey.fromString(FlxG.save.data.rightBind), FlxKey.RIGHT]);
+		inline bindKeys(Control.UP, [FlxKey.fromString(Std.string(FlxG.save.data.upBind)), FlxKey.UP]);
+		inline bindKeys(Control.DOWN, [FlxKey.fromString(Std.string(FlxG.save.data.downBind)), FlxKey.DOWN]);
+		inline bindKeys(Control.LEFT, [FlxKey.fromString(Std.string(FlxG.save.data.leftBind)), FlxKey.LEFT]);
+		inline bindKeys(Control.RIGHT, [FlxKey.fromString(Std.string(FlxG.save.data.rightBind)), FlxKey.RIGHT]);
 		inline bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
 		inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 		inline bindKeys(Control.PAUSE, [ENTER, ESCAPE]);
-		inline bindKeys(Control.RESET, [FlxKey.fromString(FlxG.save.data.killBind)]);
+		inline bindKeys(Control.RESET, [FlxKey.fromString(Std.string((FlxG.save.data.killBind)))]);
 	}
 
 	function removeKeyboard()

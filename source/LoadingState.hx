@@ -55,6 +55,7 @@ class LoadingState extends MusicBeatState
 		{
 			callbacks = new MultiCallback(onLoad);
 			var introComplete = callbacks.add("introComplete");
+
 			checkLoadSong(getSongPath());
 			if (PlayState.SONG.needsVoices)
 				checkLoadSong(getVocalPath());
@@ -154,9 +155,11 @@ class LoadingState extends MusicBeatState
 	{
 		Paths.setCurrentLevel("week" + PlayState.storyWeek);
 		#if NO_PRELOAD_ALL
-		var loaded = isSoundLoaded(getSongPath())
-			&& (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath()))
-			&& isLibraryLoaded("shared");
+		var loaded = false;
+		if (PlayState.SONG != null)
+			loaded = isSoundLoaded(getSongPath())
+				&& (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath()))
+				&& isLibraryLoaded("shared");
 
 		if (!loaded)
 			return new LoadingState(target, stopMusic);

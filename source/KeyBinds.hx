@@ -35,6 +35,7 @@ class KeyBinds
 		FlxG.sound.muteKeys = ["ZERO", "NUMPADZERO"];
 		FlxG.sound.volumeDownKeys = ["MINUS", "NUMPADMINUS"];
 		FlxG.sound.volumeUpKeys = ["PLUS", "NUMPADPLUS"];
+
 		PlayerSettings.player1.controls.loadKeyBinds();
 	}
 

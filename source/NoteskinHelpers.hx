@@ -87,7 +87,9 @@ class NoteskinHelpers
 
 		// return Paths.getSparrowAtlas('noteskins/' + NoteskinHelpers.getNoteskinByID(FlxG.save.data.noteskin), "shared");
 		#else
+		#if !html5
 		return BitmapData.fromFile(Paths.image('noteskins/Arrows-pixel', "shared"));
+		#end
 		#end
 	}
 }
