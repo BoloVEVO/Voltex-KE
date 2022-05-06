@@ -1937,6 +1937,8 @@ class CameraMoving extends Option
 
 	public override function left():Bool
 	{
+		if (FlxG.save.data.optimize)
+			return false;
 		FlxG.save.data.cameramove = !FlxG.save.data.cameramove;
 		display = updateDisplay();
 		return true;

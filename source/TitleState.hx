@@ -318,7 +318,7 @@ class TitleState extends MusicBeatState
 					}
 					else
 					{
-						MusicBeatState.switchState(new MainMenuState());
+						MusicBeatState.switchState(new LazyCreditState());
 						clean();
 					}
 				}
@@ -326,7 +326,7 @@ class TitleState extends MusicBeatState
 				http.onError = function(error)
 				{
 					trace('error: $error');
-					MusicBeatState.switchState(new MainMenuState()); // fail but we go anyway
+					MusicBeatState.switchState(new LazyCreditState()); // fail but we go anyway
 					clean();
 				}
 

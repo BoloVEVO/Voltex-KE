@@ -55,6 +55,8 @@ class StoryMenuState extends MusicBeatState
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 
+	var mustUnlock:FlxText;
+
 	function unlockWeeks():Array<Bool>
 	{
 		var weeks:Array<Bool> = [];
@@ -213,6 +215,11 @@ class StoryMenuState extends MusicBeatState
 		// add(rankText);
 		add(scoreText);
 		add(txtWeekTitle);
+
+		mustUnlock = new FlxText(leftArrow.x, bgSprite.y + 425, 0, 'Beat Week 1\n\n' + 'on Exhaust or harder', 28);
+		mustUnlock.alignment = FlxTextAlign.CENTER;
+		mustUnlock.visible = false;
+		add(mustUnlock);
 
 		updateText();
 
@@ -458,6 +465,7 @@ class StoryMenuState extends MusicBeatState
 
 		var bullShit:Int = 0;
 
+		mustUnlock.visible = curWeek == 1 && !weekUnlocked[1];
 		for (item in grpWeekText.members)
 		{
 			item.targetY = bullShit - curWeek;

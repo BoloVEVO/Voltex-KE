@@ -4222,7 +4222,8 @@ class PlayState extends MusicBeatState
 						if ((PlayState.storyDifficulty == 2 || PlayState.storyDifficulty == 4)
 							|| (PlayState.storyWeek == 1 && (PlayState.storyDifficulty == 0 || PlayState.storyDifficulty == 1)))
 							StoryMenuState.unlockNextWeek(storyWeek);
-						else if (!FlxG.save.data.hiveUnlocked)
+
+						if (!FlxG.save.data.hiveUnlocked)
 							FlxG.save.data.hiveUnlocked = true;
 					}
 					else
