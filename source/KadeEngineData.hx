@@ -61,8 +61,8 @@ class KadeEngineData
 		if (FlxG.save.data.fpsCap < 60)
 			FlxG.save.data.fpsCap = 120; // baby proof so you can't hard lock ur copy of kade engine
 
-		if (FlxG.save.data.scrollSpeed == null)
-			FlxG.save.data.scrollSpeed = 1;
+		if (FlxG.save.data.scrollSpeed == null) // Fcking json speed 1 I'm lazy lol
+			FlxG.save.data.scrollSpeed = 3;
 
 		if (FlxG.save.data.npsDisplay == null)
 			FlxG.save.data.npsDisplay = true;
@@ -122,7 +122,7 @@ class KadeEngineData
 			FlxG.save.data.optimize = false;
 
 		if (FlxG.save.data.discordMode == null)
-			FlxG.save.data.discordMode = 2;
+			FlxG.save.data.discordMode = 3;
 
 		if (FlxG.save.data.roundAccuracy == null)
 			FlxG.save.data.roundAccuracy = false;

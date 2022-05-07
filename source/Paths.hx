@@ -61,7 +61,8 @@ class Paths
 	{
 		// I hate this so god damn much
 		var gottenPath:String = getPath('$path/$key.$SOUND_EXT', SOUND, library);
-		gottenPath = gottenPath.substring(gottenPath.indexOf(':') + 1, gottenPath.length);
+		var indexPath = gottenPath == null ? null : gottenPath; // FUCK YOU HTML5
+		gottenPath = gottenPath.substring(indexPath.indexOf(':') + 1, gottenPath.length);
 		// trace(gottenPath);
 		if (!currentTrackedSounds.exists(gottenPath))
 			#if MODS_ALLOWED

@@ -76,16 +76,19 @@ class LoadingState extends MusicBeatState
 		if (!OpenFlAssets.cache.hasSound(path))
 		{
 			var library = OpenFlAssets.getLibrary("songs");
-			final symbolPath = path.split(":").pop();
+			final symbolPath = path == null ? null : path.split(":").pop();
 			// @:privateAccess
 			// library.types.set(symbolPath, SOUND);
 			// @:privateAccess
 			// library.pathGroups.set(symbolPath, [library.__cacheBreak(symbolPath)]);
-			var callback = callbacks.add("song:" + path);
-			OpenFlAssets.loadSound(path).onComplete(function(_)
+			if (path != null)
 			{
-				callback();
-			});
+				var callback = callbacks.add("song:" + path);
+				OpenFlAssets.loadSound(path).onComplete(function(_)
+				{
+					callback();
+				});
+			}
 		}
 	}
 

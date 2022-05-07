@@ -393,6 +393,50 @@ class PlayState extends MusicBeatState
 		GameplayCustomizeState.freeplaySong = 'bopeebo';
 		GameplayCustomizeState.freeplayWeek = 1;
 
+		switch (SONG.songId)
+		{
+			case 'bopeebo':
+				songFixedName = "Bopeebo";
+			case 'fresh':
+				songFixedName = "Fresh!";
+			case 'dadbattle':
+				songFixedName = "Dad Battle";
+			case "spookeez":
+				songFixedName = "Spookeez!";
+			case "south":
+				songFixedName = "South";
+			case "monster":
+				songFixedName = "Monster...";
+			case "pico":
+				songFixedName = "Pico";
+			case "philly":
+				songFixedName = "Philly Noice";
+			case "blammed":
+				songFixedName = "Blammed";
+			case "high":
+				songFixedName = "High!";
+			case "cocoa":
+				songFixedName = "Cocoa";
+			case "eggnog":
+				songFixedName = "EGGnog";
+			case "winter-horroland":
+				songFixedName = "Winter Horroland...";
+			case "senpai":
+				songFixedName = "Hentai! Uh I mean Senpai!";
+			case "roses":
+				songFixedName = "Roses...";
+			case "thorns":
+				songFixedName = "Thorns!";
+			case 'bi':
+				songFixedName = "Bi び";
+			case 'made-in-love':
+				songFixedName = "Made In Love";
+			case 'sayonara-planet-wars':
+				songFixedName = "Sayonara Planet Wars!";
+			case 'fin4le':
+				songFixedName = "F1n4le";
+		}
+
 		previousRate = songMultiplier - 0.05;
 
 		if (previousRate < 1.00)
@@ -544,12 +588,12 @@ class PlayState extends MusicBeatState
 
 		// Updating Discord Rich Presence
 		if (FlxG.save.data.discordMode != 0)
-			DiscordClient.changePresence(SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") " + Ratings.GenerateComboRank(accuracy)
-				+ " " + Ratings.GenerateLetterRank(accuracy),
-				"\nScr: " + songScore + " (" + HelperFunctions.truncateFloat(accuracy, 2) + "%)"
-				+ " | Misses: " + misses, iconRPC);
+			DiscordClient.changePresence(songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
+				+ Ratings.GenerateComboRank(accuracy) + " " + Ratings.GenerateLetterRank(accuracy),
+				"\nScr: " + songScore + " ("
+				+ HelperFunctions.truncateFloat(accuracy, 2) + "%)" + " | Misses: " + misses, iconRPC);
 		else
-			DiscordClient.changePresence("Playing " + SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") ", "", iconRPC);
+			DiscordClient.changePresence("Playing " + songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") ", "", iconRPC);
 		#end
 
 		camGame = new FlxCamera();
@@ -1869,50 +1913,6 @@ class PlayState extends MusicBeatState
 		// Song duration in a float, useful for the time left feature
 		songLength = ((FlxG.sound.music.length / songMultiplier) / 1000);
 
-		switch (SONG.songName)
-		{
-			case 'bopeebo':
-				songFixedName = "Bopeebo";
-			case 'fresh':
-				songFixedName = "Fresh!";
-			case 'dadbattle':
-				songFixedName = "Dad Battle";
-			case "spookeez":
-				songFixedName = "Spookeez!";
-			case "south":
-				songFixedName = "South";
-			case "monster":
-				songFixedName = "Monster...";
-			case "pico":
-				songFixedName = "Pico";
-			case "philly":
-				songFixedName = "Philly Noice";
-			case "blammed":
-				songFixedName = "Blammed";
-			case "high":
-				songFixedName = "High!";
-			case "cocoa":
-				songFixedName = "Cocoa";
-			case "eggnog":
-				songFixedName = "EGGnog";
-			case "winter-horroland":
-				songFixedName = "Winter Horroland...";
-			case "senpai":
-				songFixedName = "Hentai! Uh I mean Senpai!";
-			case "roses":
-				songFixedName = "Roses...";
-			case "thorns":
-				songFixedName = "Thorns!";
-			case 'bi':
-				songFixedName = "び";
-			case 'made-in-love':
-				songFixedName = "Made In Love";
-			case 'sayonara-planet-wars':
-				songFixedName = "Sayonara Planet Wars!";
-			case 'fin4le':
-				songFixedName = "Fin4le";
-		}
-
 		songPosBG = new FlxSprite(0, 10).loadGraphic(Paths.image('healthBar'));
 		if (PlayStateChangeables.useDownscroll)
 			songPosBG.y = FlxG.height * 0.9 + 35;
@@ -2399,12 +2399,12 @@ class PlayState extends MusicBeatState
 			if (!endingSong)
 			{
 				if (FlxG.save.data.discordMode != 0)
-					DiscordClient.changePresence("PAUSED on " + "\n" + SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
+					DiscordClient.changePresence("PAUSED on " + "\n" + songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
 						+ Ratings.GenerateComboRank(accuracy) + " " + Ratings.GenerateLetterRank(accuracy),
 						"\nScr: " + songScore + " ("
 						+ HelperFunctions.truncateFloat(accuracy, 2) + "%)" + " | Misses: " + misses, iconRPC);
 				else
-					DiscordClient.changePresence("PAUSED on " + SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") ", "", iconRPC);
+					DiscordClient.changePresence("PAUSED on " + songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") ", "", iconRPC);
 			}
 			#end
 			if (!startTimer.finished)
@@ -2454,7 +2454,7 @@ class PlayState extends MusicBeatState
 			#if FEATURE_DISCORD
 			if (FlxG.save.data.discordMode != 0)
 			{
-				DiscordClient.changePresence(SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
+				DiscordClient.changePresence(songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
 					+ Ratings.GenerateComboRank(accuracy) + " " + Ratings.GenerateLetterRank(accuracy),
 					"\nScr: " + songScore + " ("
 					+ HelperFunctions.truncateFloat(accuracy, 2) + "%)" + " | Misses: " + misses, iconRPC);
@@ -2541,10 +2541,10 @@ class PlayState extends MusicBeatState
 		#if FEATURE_DISCORD
 		if (FlxG.save.data.discordMode == 2)
 		{
-			DiscordClient.changePresence(SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") " + Ratings.GenerateComboRank(accuracy)
-				+ " " + Ratings.GenerateLetterRank(accuracy),
-				"\nScr: " + songScore + " (" + HelperFunctions.truncateFloat(accuracy, 2) + "%)"
-				+ " | Misses: " + misses, iconRPC);
+			DiscordClient.changePresence(songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
+				+ Ratings.GenerateComboRank(accuracy) + " " + Ratings.GenerateLetterRank(accuracy),
+				"\nScr: " + songScore + " ("
+				+ HelperFunctions.truncateFloat(accuracy, 2) + "%)" + " | Misses: " + misses, iconRPC);
 		}
 		#end
 
@@ -3118,49 +3118,6 @@ class PlayState extends MusicBeatState
 
 			if (!paused)
 			{
-				switch (curSong)
-				{
-					case 'bopeebo':
-						songFixedName = "Bopeebo";
-					case 'fresh':
-						songFixedName = "Fresh!";
-					case 'dadbattle':
-						songFixedName = "Dad Battle";
-					case "spookeez":
-						songFixedName = "Spookeez!";
-					case "south":
-						songFixedName = "South";
-					case "monster":
-						songFixedName = "Monster...";
-					case "pico":
-						songFixedName = "Pico";
-					case "philly":
-						songFixedName = "Philly Noice";
-					case "blammed":
-						songFixedName = "Blammed";
-					case "high":
-						songFixedName = "High!";
-					case "cocoa":
-						songFixedName = "Cocoa";
-					case "eggnog":
-						songFixedName = "EGGnog";
-					case "winter-horroland":
-						songFixedName = "Winter Horroland...";
-					case "senpai":
-						songFixedName = "Hentai! Uh I mean Senpai!";
-					case "roses":
-						songFixedName = "Roses...";
-					case "thorns":
-						songFixedName = "Thorns!";
-					case 'bi':
-						songFixedName = "Bi び";
-					case 'made-in-love':
-						songFixedName = "Made In Love";
-					case 'sayonara-planet-wars':
-						songFixedName = "Sayonara Planet Wars!";
-					case 'fin4le':
-						songFixedName = "Fin4le";
-				}
 				songTime += FlxG.game.ticks - previousFrameTime;
 				previousFrameTime = FlxG.game.ticks;
 
@@ -3452,15 +3409,15 @@ class PlayState extends MusicBeatState
 				// Game Over doesn't get his own variable because it's only used here
 				if (FlxG.save.data.discordMode != 0)
 				{
-					DiscordClient.changePresence("GAME OVER -- " + "\n" + SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
+					DiscordClient.changePresence("GAME OVER -- " + "\n" + songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
 						+ Ratings.GenerateComboRank(accuracy) + " " + Ratings.GenerateLetterRank(accuracy),
 						"\nScr: " + songScore + " ("
 						+ HelperFunctions.truncateFloat(accuracy, 2) + "%)" + " | Misses: " + misses, iconRPC);
 				}
 				else
 				{
-					DiscordClient.changePresence("GAME OVER -- " + "\nPlaying " + SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") ",
-						"", iconRPC);
+					DiscordClient.changePresence("GAME OVER -- " + "\nPlaying " + songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x"
+						+ ") ", "", iconRPC);
 				}
 				#end
 				// God I love watching Yosuga No Sora with my sister (From: Bolo)
@@ -3498,15 +3455,15 @@ class PlayState extends MusicBeatState
 				// Game Over doesn't get his own variable because it's only used here
 				if (FlxG.save.data.discordMode != 0)
 				{
-					DiscordClient.changePresence("GAME OVER -- " + "\n" + SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
+					DiscordClient.changePresence("GAME OVER -- " + "\n" + songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
 						+ Ratings.GenerateComboRank(accuracy) + " " + Ratings.GenerateLetterRank(accuracy),
 						"\nScr: " + songScore + " ("
 						+ HelperFunctions.truncateFloat(accuracy, 2) + "%)" + " | Misses: " + misses, iconRPC);
 				}
 				else
 				{
-					DiscordClient.changePresence("GAME OVER -- " + "\nPlaying " + SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") ",
-						"", iconRPC);
+					DiscordClient.changePresence("GAME OVER -- " + "\nPlaying " + songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x"
+						+ ") ", "", iconRPC);
 				}
 				#end
 
@@ -3538,10 +3495,12 @@ class PlayState extends MusicBeatState
 						if (daNote.isSustainNote)
 						{
 							var bpmRatio = (SONG.bpm / 100);
-							if (songStarted)
+
+							if ((!daNote.animation.curAnim.name.endsWith('end') && !songStarted) || songStarted)
 								daNote.y -= daNote.height - (1.5 * stepHeight / SONG.speed * bpmRatio);
-							else if (daNote.animation.curAnim.name.endsWith('end') && daNote.prevNote != null && !songStarted)
-								daNote.y += daNote.prevNote.height / 1.5;
+							if (daNote.animation.curAnim.name.endsWith('end') && daNote.prevNote != null && !songStarted)
+								daNote.y += (daNote.prevNote.height * bpmRatio) / (scrollSpeed == 1 ? SONG.speed * 1.2 : scrollSpeed * 1.2);
+
 							// Kinda newbie way for fixing hold sustain notes but it works :o (-Bolo)
 							// If not in botplay, only clip sustain notes when properly hit, botplay gets to clip it everytime
 							if (daNote.sustainActive)
@@ -4156,12 +4115,12 @@ class PlayState extends MusicBeatState
 				if (FlxG.save.data.scoreScreen)
 				{
 					if (FlxG.save.data.discordMode != 0)
-						DiscordClient.changePresence('RESULTS SCREEN -- ' + SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
+						DiscordClient.changePresence('RESULTS SCREEN -- ' + songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
 							+ Ratings.GenerateComboRank(accuracy) + " " + Ratings.GenerateLetterRank(accuracy),
 							"\nScr: " + songScore + " ("
 							+ HelperFunctions.truncateFloat(accuracy, 2) + "%)" + " | Misses: " + misses, iconRPC);
 					else
-						DiscordClient.changePresence('RESULTS SCREEN -- ' + SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") ",
+						DiscordClient.changePresence('RESULTS SCREEN -- ' + songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") ",
 							iconRPC);
 				}
 				#end
@@ -4600,7 +4559,7 @@ class PlayState extends MusicBeatState
 			var str:String = comboSplit[i];
 			seperatedScore.push(Std.parseInt(str));
 		}
-
+		var ciphers:Int = 0;
 		var daLoop:Int = 0;
 		for (i in seperatedScore)
 		{
@@ -4611,6 +4570,11 @@ class PlayState extends MusicBeatState
 			numScore.x = rating.x + (43 * daLoop) + 57;
 			numScore.y = rating.y + 100;
 			numScore.cameras = [camHUD];
+
+			if (combo >= 1000)
+			{
+				numScore.x = rating.x + (43 * daLoop) + 52;
+			}
 
 			FlxTween.cancelTweensOf(numScore);
 			FlxTween.cancelTweensOf(numScore.scale);
@@ -5142,10 +5106,10 @@ class PlayState extends MusicBeatState
 		#if FEATURE_DISCORD
 		// Updating Discord Rich Presence
 		if (FlxG.save.data.discordMode == 3)
-			DiscordClient.changePresence(SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") " + Ratings.GenerateComboRank(accuracy)
-				+ " " + Ratings.GenerateLetterRank(accuracy),
-				"\nScr: " + songScore + " (" + HelperFunctions.truncateFloat(accuracy, 2) + "%)"
-				+ " | Misses: " + misses, iconRPC);
+			DiscordClient.changePresence(songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
+				+ Ratings.GenerateComboRank(accuracy) + " " + Ratings.GenerateLetterRank(accuracy),
+				"\nScr: " + songScore + " ("
+				+ HelperFunctions.truncateFloat(accuracy, 2) + "%)" + " | Misses: " + misses, iconRPC);
 		#end
 	}
 
@@ -5521,10 +5485,10 @@ class PlayState extends MusicBeatState
 		#if FEATURE_DISCORD
 		if (FlxG.save.data.discordMode == 1)
 		{
-			DiscordClient.changePresence(SONG.song + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") " + Ratings.GenerateComboRank(accuracy)
-				+ " " + Ratings.GenerateLetterRank(accuracy),
-				"\nScr: " + songScore + " (" + HelperFunctions.truncateFloat(accuracy, 2) + "%)"
-				+ " | Misses: " + misses, iconRPC);
+			DiscordClient.changePresence(songFixedName + " (" + storyDifficultyText + " " + songMultiplier + "x" + ") "
+				+ Ratings.GenerateComboRank(accuracy) + " " + Ratings.GenerateLetterRank(accuracy),
+				"\nScr: " + songScore + " ("
+				+ HelperFunctions.truncateFloat(accuracy, 2) + "%)" + " | Misses: " + misses, iconRPC);
 		}
 		#end
 

@@ -413,7 +413,7 @@ class GameplayCustomizeState extends MusicBeatState
 
 			var seperatedScore:Array<Int> = [];
 
-			var comboSplit:Array<String> = (FlxG.random.int(10, 420) + "").split('');
+			var comboSplit:Array<String> = (FlxG.random.int(10, 420) + 1 + "").split('');
 
 			// make sure we have 3 digits to display (looks weird otherwise lol)
 			if (comboSplit.length == 1)
@@ -433,12 +433,17 @@ class GameplayCustomizeState extends MusicBeatState
 			var daLoop:Int = 0;
 			for (i in seperatedScore)
 			{
+				daLoop++;
 				var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2, pixelShitPart4));
 				numScore.screenCenter();
 				numScore.x = sick.x + (43 * daLoop) + 65;
 				numScore.y = sick.y + 100;
 				numScore.cameras = [camHUD];
 
+				if (comboSplit.length > 2 && comboSplit.length % 1 == 0)
+				{
+					numScore.x -= 10;
+				}
 				if (freeplayNoteStyle != 'pixel')
 				{
 					numScore.antialiasing = FlxG.save.data.antialiasing;
@@ -466,8 +471,6 @@ class GameplayCustomizeState extends MusicBeatState
 				});
 
 				FlxTween.tween(numScore.scale, {x: 0.45, y: 0.45}, 0.25, {});
-
-				daLoop++;
 			}
 		}
 

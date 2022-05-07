@@ -21,7 +21,8 @@ class CoolUtil
 
 	public static function coolTextFile(path:String):Array<String>
 	{
-		var daList:Array<String> = OpenFlAssets.getText(path).trim().split('\n');
+		var daPath:String = path == null ? '' : path;
+		var daList:Array<String> = OpenFlAssets.getText(daPath).trim().split('\n');
 
 		for (i in 0...daList.length)
 		{
